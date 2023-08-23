@@ -1,20 +1,22 @@
 #!/usr/bin/python3
 
-import sys
-
 
 def getArguments():
-    if len(sys.argv) == 1:
-        print("Usage: ./star")
-        sys.exit()
-    else:
-        return sys.argv[1]
+    import sys
+
+    if len(sys.argv) != 2:
+        print("Usage: ./start")
+        exit(1)
+    return int(sys.argv[1])
 
 
 if __name__ == "__main__":
     size = int(getArguments())
 
-    if size == 0:
+    if size < 0:
+        print("Usage: ./star")
+        exit()
+    elif size == 0:
         exit()
     else:
         rows = size * 4 + 1
@@ -57,6 +59,10 @@ if __name__ == "__main__":
 
         for i in range(middle_row):
             board[rows - i - 1] = board[i]
+
+        for row in board:
+            while row[-1] == " ":
+                row.pop()
 
         for row in board:
             print("".join(row))
